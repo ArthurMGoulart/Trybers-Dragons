@@ -1,11 +1,12 @@
-import Race from '.';
+import Race from './Race';
+import MaxLifePoints from './Enums';
 
-class Dwarf extends Race {
+class Elf extends Race {
   private _maxLifePoints: number;
 
   constructor(n: string, d: number) {
     super(n, d);
-    this._maxLifePoints = 99;
+    this._maxLifePoints = MaxLifePoints.ELF;
   }
 
   get maxLifePoints(): number {
@@ -13,4 +14,4 @@ class Dwarf extends Race {
   }
 }
 
-export default Dwarf;
+export default Elf;

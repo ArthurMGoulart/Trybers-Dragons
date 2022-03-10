@@ -1,12 +1,12 @@
 import Race from './Race';
 import MaxLifePoints from './Enums';
 
-class Dwarf extends Race {
+class Halfling extends Race {
   private _maxLifePoints: number;
 
   constructor(n: string, d: number) {
     super(n, d);
-    this._maxLifePoints = MaxLifePoints.DWARF;
+    this._maxLifePoints = MaxLifePoints.HALFLING;
   }
 
   get maxLifePoints(): number {
@@ -14,4 +14,4 @@ class Dwarf extends Race {
   }
 }
 
-export default Dwarf;
+export default Halfling;
