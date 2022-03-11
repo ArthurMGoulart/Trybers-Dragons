@@ -1,5 +1,5 @@
 import Race from './Race';
-import MaxLifePoints from './Enums';
+import { MaxLifePoints } from './Enums';
 
 class Dwarf extends Race {
   private _maxLifePoints: number;

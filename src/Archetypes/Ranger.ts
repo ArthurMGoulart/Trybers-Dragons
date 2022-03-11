@@ -1,6 +1,6 @@
 import Archetype from './Archetype';
 import { EnergyType } from '../Energy';
-import ArchetypeEnergyType from './Enums';
+import { ArchetypeEnergyType } from './Enums';
 
 class Ranger extends Archetype {
   private _energyType: EnergyType;

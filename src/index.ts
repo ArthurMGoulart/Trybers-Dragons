@@ -1,15 +1,5 @@
-import reader from './Reader';
+import Writer from './Writer/Writer';
 
-reader.question('Is this example useful? [y/n] ', (answer) => {
-  switch (answer.toLowerCase()) {
-    case 'y':
-      console.log('Super!');
-      break;
-    case 'n':
-      console.log('Sorry! :(');
-      break;
-    default:
-      console.log('Invalid answer!');
-  }
-  reader.close();
-});
+const main = new Writer();
+
+main.start();

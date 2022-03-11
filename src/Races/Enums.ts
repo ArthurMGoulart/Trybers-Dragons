@@ -1,3 +1,10 @@
+enum Races {
+  DWARF = 'Dwarf',
+  ELF = 'Elf',
+  HALFLING = 'Halfling',
+  ORC = 'Orc',
+}
+
 enum MaxLifePoints {
   DWARF = 80,
   ELF = 99,
@@ -5,4 +12,4 @@ enum MaxLifePoints {
   ORC = 74,
 }
 
-export default MaxLifePoints;
+export { Races, MaxLifePoints };

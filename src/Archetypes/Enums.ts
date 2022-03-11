@@ -1,3 +1,10 @@
+enum Archetypes {
+  MAGE = 'Mage',
+  NECROMANCER = 'Necromancer',
+  WARRIOR = 'Warrior',
+  RANGER = 'Ranger',
+}
+
 enum ArchetypeEnergyType {
   MAGE = 'mana',
   NECROMANCER = 'mana',
@@ -5,4 +12,4 @@ enum ArchetypeEnergyType {
   RANGER = 'stamina',
 }
 
-export default ArchetypeEnergyType;
+export { Archetypes, ArchetypeEnergyType };
