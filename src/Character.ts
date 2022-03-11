@@ -1,6 +1,6 @@
 import Archetype, { Mage } from './Archetypes';
 import Energy from './Energy';
-import Fighter from './Fighter';
+import Fighter, { SimpleFighter } from './Fighter';
 import Race, { Elf } from './Races';
 import getRandomInt from './utils';
 
@@ -15,10 +15,14 @@ class Character implements Fighter {
   private _defense: number;
   private _energy: Energy;
 
-  constructor(n: string) {
+  constructor(
+    n: string,
+    race: Race = new Elf(n, 2),
+    archetype: Archetype = new Mage(n),
+  ) {
     this.name = n;
-    this._race = new Elf(n, 20);
-    this._archetype = new Mage(n);
+    this._race = race;
+    this._archetype = archetype;
     this._maxLifePoints = this._race.maxLifePoints / 2;
     this._lifePoints = this._maxLifePoints;
     this._strength = getRandomInt(1, 10);
@@ -33,25 +37,25 @@ class Character implements Fighter {
   get race(): Race {
     return this._race;
   }
-
+  
   get archetype(): Archetype {
     return this._archetype;
   }
   
-  get dexterity(): number {
-    return this._dexterity;
-  }
-
   get lifePoints(): number {
     return this._lifePoints;
   }
-
+  
   get strength(): number {
-    return this._lifePoints;
+    return this._strength;
   }
   
   get defense(): number {
     return this._defense;
+  }
+  
+  get dexterity(): number {
+    return this._dexterity;
   }
   
   get energy(): Energy {
@@ -63,14 +67,19 @@ class Character implements Fighter {
 
   receiveDamage(attackPoints: number): number {
     const damage = attackPoints - this._defense;
-    if (damage > 0) {
-      this._lifePoints = this._lifePoints - damage <= 0 ? -1 
-        : this._lifePoints - damage;
+
+    if (damage > 0) { 
+      this._lifePoints -= damage;
     }
+    // Check if Character died
+    if (this._lifePoints <= 0) { 
+      this._lifePoints = -1;
+    }
+
     return this._lifePoints;
   }
   
-  attack(enemy: Fighter): void {
+  attack(enemy: SimpleFighter): void {
     enemy.receiveDamage(this._strength);
   }
 
@@ -87,7 +96,7 @@ class Character implements Fighter {
     this._lifePoints = this._maxLifePoints;
   }
 
-  special(enemy: Fighter): void {
+  special(enemy: SimpleFighter): void {
     // All in 50/50
     const flip = getRandomInt(1, 2);
     if (flip === 1) {
