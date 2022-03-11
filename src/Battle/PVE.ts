@@ -52,9 +52,9 @@ class PVE extends Battle {
 
   checkDeadEnemy(enemy: Fighter | SimpleFighter): boolean {
     if (enemy.lifePoints === -1) {
-      // Kills monster from enviroment and checks if enviroment is undefined
-      const popped = this._enviroment.pop();
-      if (!popped) {
+      // Kills monster from enviroment and checks if enviroment is blank
+      this._enviroment = this._enviroment.slice(0, -1);
+      if (this._enviroment.length === 0) {
         this._end = true;
         return true;
       }
