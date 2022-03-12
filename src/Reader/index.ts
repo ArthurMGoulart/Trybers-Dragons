@@ -1,3 +1,3 @@
-import reader from './Reader';
+import Reader from './Reader';
 
-export default reader;
+export default Reader;

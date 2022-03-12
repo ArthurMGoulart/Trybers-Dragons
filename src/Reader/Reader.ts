@@ -1,8 +1,18 @@
 import * as readline from 'readline';
 
-const reader = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+class Reader {
+  private _reader: readline.Interface;
 
-export default reader;
+  constructor() {
+    this._reader = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+  }
+
+  get reader(): readline.Interface {
+    return this._reader;
+  }
+}
+
+export default Reader;

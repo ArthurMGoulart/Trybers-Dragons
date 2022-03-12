@@ -1,18 +1,18 @@
+/* eslint-disable max-len */
 /* eslint-disable max-lines-per-function */
-import { ReadLine } from 'readline';
 import Game from '../Game';
 import { Archetypes } from '../Archetypes/Enums';
 import { Races } from '../Races/Enums';
-import reader from '../Reader';
+import Reader from '../Reader';
 
 const INVALID_OPTION = 'Invalid Option';
 
 class Writer {
-  private _reader: ReadLine = reader;
+  private _reader: Reader = new Reader();
   private _controller: Game = new Game();
 
   get reader() {
-    return this._reader;
+    return this._reader.reader;
   }
 
   start() {
@@ -21,7 +21,7 @@ class Writer {
 
   menu() {
     this.reader.question(`------ Menu Trybers&Dragons ------
-    1 - Create Character /n 2 - Play /n 3 - Create Dragon`, (answer) => {
+       1 - Create Character\n       2 - Play\n       3 - Create Dragon\n`, (answer) => {
       switch (answer.toLowerCase()) {
         case '1':
           this.createCharacter();
@@ -39,16 +39,16 @@ class Writer {
     });
   }
 
-  createCharacter() {
-    const name = this.askName();
-    const race = this.chooseRace();
+  async createCharacter() {
+    const name = await this.askName();
+    const race = await this.chooseRace();
     const archetype = this.chooseArchetype();
     this._controller.createCharacter(name, race, archetype);
   }
 
-  askName(): string {
+  async askName(): Promise<string> {
     let name = '';
-    this.reader.question('What is your name?', (answer) => { 
+    await this.reader.question('What is your name?', (answer) => { 
       name = answer;
     });
     return name;
@@ -57,7 +57,7 @@ class Writer {
   chooseRace(): string {
     let race = '';
     this.reader.question(`Choose your Race:
-    1 - Dwarf /n 2 - Elf /n 3 - Halfling /n 4 - Orc`, (answer) => {
+    1 - Dwarf \n 2 - Elf \n 3 - Halfling \n 4 - Orc`, (answer) => {
       switch (answer.toLowerCase()) {
         case '1':
           race = Races.DWARF;
